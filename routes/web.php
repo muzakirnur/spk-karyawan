@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\SubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route for the getting the data feed
     Route::get('/json-data-feed', [DataFeedController::class, 'getDataFeed'])->name('json_data_feed');
+    
+    // Route for Pelamar
+    Route::get('pelamar/dashboard', [SubmissionController::class, 'index'])->name('dashboard-pelamar');
+    
+    // Route data diri pelamar
+    Route::get('pelamar/data-diri', [PelamarController::class, 'index'])->name('pelamar.index');
 
     Route::middleware('pelamar')->group(function (){
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     });
     Route::fallback(function() {
         return view('pages/utility/404');

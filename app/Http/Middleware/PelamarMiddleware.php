@@ -19,7 +19,7 @@ class PelamarMiddleware
     {
         $user = Auth::user();
         if($user->is_admin == false){
-            dd("Anda Adalah Pelamar");
+            return redirect()->route('submission.index');
         }
         return $next($request);
     }
