@@ -1,3 +1,5 @@
 <x-app-layout>
-    <x-dashboard.welcome-banner />
+    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+        <x-dashboard.welcome-banner />
+    </div>
 </x-app-layout>

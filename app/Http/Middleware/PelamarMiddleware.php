@@ -19,7 +19,7 @@ class PelamarMiddleware
     {
         $user = Auth::user();
         if($user->is_admin == false){
-            return redirect()->route('submission.index');
+            return redirect()->route('dashboard-pelamar');
         }
         return $next($request);
     }

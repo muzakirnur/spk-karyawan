@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     
     // Route data diri pelamar
     Route::get('pelamar/data-diri', [PelamarController::class, 'index'])->name('pelamar.index');
+    Route::post('pelamar/data-diri', [PelamarController::class, 'create'])->name('pelamar.create');
 
     Route::middleware('pelamar')->group(function (){
         Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');

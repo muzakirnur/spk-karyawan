@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('pelamars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('nik');
             $table->string('nama');
             $table->string('tempat_lahir');
             $table->string('tanggal_lahir');
-            $table->integer('tahun');
             $table->string('jenis_kelamin');
             $table->string('email');
             $table->string('hp');
