@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
@@ -37,6 +38,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /* Route Manajemen User */
         Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
+
+        /* Route Manajemen Pelamar */
+        Route::get('admin/pelamar', [AdminPelamarController::class, 'index'])->name('admin.pelamar.index');
     });
     Route::fallback(function() {
         return view('pages/utility/404');
