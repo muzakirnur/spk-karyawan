@@ -5,6 +5,7 @@ use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::middleware('pelamar')->group(function (){
         Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        /* Route Manajemen User */
+        Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
     });
     Route::fallback(function() {
         return view('pages/utility/404');
