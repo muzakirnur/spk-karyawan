@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
@@ -41,6 +42,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /* Route Manajemen Pelamar */
         Route::get('admin/pelamar', [AdminPelamarController::class, 'index'])->name('admin.pelamar.index');
+
+        /* Route Kriteria */
+        Route::get('admin/kriteria', [KriteriaController::class, 'index'])->name('admin.kriteria.index');
+        Route::get('admin/kriteria/create', [KriteriaController::class, 'create'])->name('admin.kriteria.create');
+        Route::post('admin/kriteria/create', [KriteriaController::class, 'save'])->name('admin.kriteria.save');
     });
     Route::fallback(function() {
         return view('pages/utility/404');

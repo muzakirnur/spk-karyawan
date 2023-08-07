@@ -4,13 +4,12 @@
             <i class="fa-solid fa-user mr-2"></i>
             <span> Manajemen User</span>
         </h3>
-        <div class="bg-whit px-8 py-12 shadow-lg rounded-lg">
+        <div class="bg-white px-8 py-12 shadow-lg rounded-lg">
             <div class="table-responsive">
                 <table id="tbl_list" class="table table-striped table-bordered" cellspacing="0"
                     width="100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Hak Akses</th>
@@ -30,10 +29,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: '{{ url()->current() }}',
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
+                columns: [
                     {
                         data: 'name',
                         name: 'name'
