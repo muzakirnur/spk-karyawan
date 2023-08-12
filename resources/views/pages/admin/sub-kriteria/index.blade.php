@@ -18,7 +18,10 @@
         @foreach ($tables as $tab)
         <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8">
             <div class="flex flex-wrap justify-between">
-                <h2 class="font-semibold text-lg">{{ $tab->kode_kriteria }} - {{ $tab->nama }}</h2>
+                <h2 class="font-semibold text-lg">
+                    <i class="fa-brands fa-uncharted"></i>
+                    {{ $tab->nama }} ({{ $tab->kode_kriteria }})
+                </h2>
                 <a href="{{ route('admin.sub-kriteria.create', Crypt::encrypt($tab->id)) }}" class="bg-indigo-500 text-white rounded-lg px-4 py-2 shadow-sm text-sm font-semibold transition ease-in-out duration-300 hover:opacity-80">
                     <i class="fa-solid fa-plus"></i>
                     Tambah Subkriteria

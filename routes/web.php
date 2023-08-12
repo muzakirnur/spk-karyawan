@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /* Route Manajemen Pelamar */
         Route::get('admin/pelamar', [AdminPelamarController::class, 'index'])->name('admin.pelamar.index');
+        Route::get('admin/pelamar/show/{id}', [AdminPelamarController::class, 'show'])->name('admin.pelamar.show');
 
         /* Route Kriteria */
         Route::get('admin/kriteria', [KriteriaController::class, 'index'])->name('admin.kriteria.index');

@@ -16,6 +16,7 @@
                             <th>Email</th>
                             <th>Telepon</th>
                             <th>Pendidikan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,6 +56,10 @@
                     {
                         data: 'pendidikan',
                         name: 'pendidikan'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
                     },
                 ]
             });
