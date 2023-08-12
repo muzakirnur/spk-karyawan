@@ -50,9 +50,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('admin/kriteria/create', [KriteriaController::class, 'save'])->name('admin.kriteria.save');
 
         /* Route Subcriteria */
-        Route::get('admin/sub-kriteria',[SubcriteriaController::class, 'index'])->name('admin.sub-criteria.index');
-        Route::get('admin/sub-kriteria/create/{id}', [SubcriteriaController::class, 'create'])->name('admin.sub-criteria.create');
-        Route::post('admin/sub-kriteria/create/{id}', [SubcriteriaController::class, 'save'])->name('admin.sub-criteria.save');
+        Route::get('admin/sub-kriteria',[SubcriteriaController::class, 'index'])->name('admin.sub-kriteria.index');
+        Route::get('admin/sub-kriteria/create/{id}', [SubcriteriaController::class, 'create'])->name('admin.sub-kriteria.create');
+        Route::post('admin/sub-kriteria/create/{id}', [SubcriteriaController::class, 'save'])->name('admin.sub-kriteria.save');
+        Route::get('admin/sub-kriteria/edit/{id}', [SubcriteriaController::class, 'edit'])->name('admin.sub-kriteria.edit');
+        Route::put('admin/sub-kriteria/edit/{id}',[SubcriteriaController::class, 'update'])->name('admin.sub-kriteria.update');
+        Route::get('admin/sub-kriteria/delete/{id}', [SubcriteriaController::class,'destroy'])->name('admin.sub-kriteria.destroy');
     });
     Route::fallback(function() {
         return view('pages/utility/404');

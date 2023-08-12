@@ -33,6 +33,33 @@ class SubcriteriaController extends Controller
         ]);
         $validated['criteria_id'] = $id;
         SubCriteria::create($validated);
-        return redirect()->route('admin.sub-criteria.index')->with('success', 'Subkriteria berhasil ditambahkan!');
+        return redirect()->route('admin.sub-kriteria.index')->with('success', 'Subkriteria berhasil ditambahkan!');
+    }
+
+    public function edit($id)
+    {
+        $id = Crypt::decrypt($id);
+        $subkriteria = SubCriteria::findOrFail($id);
+        return view('pages.admin.sub-kriteria.edit', compact('subkriteria'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $id = Crypt::decrypt($id);
+        $subkriteria = SubCriteria::findOrFail($id);
+        $validated = $request->validate([
+            'nama' => ['required'],
+            'nilai' => ['required']
+        ]);
+        $subkriteria->update($validated);
+        return redirect()->route('admin.sub-kriteria.index')->with('success', 'Subkriteria berhasil diupdate!');
+    }
+
+    public function destroy($id)
+    {
+        $id = Crypt::decrypt($id);
+        $subkriteria = SubCriteria::findOrFail($id);
+        $subkriteria->delete();
+        return redirect()->route('admin.sub-kriteria.index')->with('success', 'Subkriteria berhasil dihapus!');
     }
 }

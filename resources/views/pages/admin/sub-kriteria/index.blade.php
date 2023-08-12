@@ -19,7 +19,7 @@
         <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8">
             <div class="flex flex-wrap justify-between">
                 <h2 class="font-semibold text-lg">{{ $tab->kode_kriteria }} - {{ $tab->nama }}</h2>
-                <a href="{{ route('admin.sub-criteria.create', Crypt::encrypt($tab->id)) }}" class="bg-indigo-500 text-white rounded-lg px-4 py-2 shadow-sm text-lg font-semibold transition ease-in-out duration-300 hover:opacity-80">
+                <a href="{{ route('admin.sub-kriteria.create', Crypt::encrypt($tab->id)) }}" class="bg-indigo-500 text-white rounded-lg px-4 py-2 shadow-sm text-sm font-semibold transition ease-in-out duration-300 hover:opacity-80">
                     <i class="fa-solid fa-plus"></i>
                     Tambah Subkriteria
                 </a>
@@ -54,13 +54,13 @@
                                     {{ $row->nilai }}
                                 </td>
                                 <td class="text-center p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                    <a href="#" class="py-2 mr-2 px-4 text-sm bg-slate-700 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
+                                    <a href="{{ route('admin.sub-kriteria.edit', Crypt::encrypt($row->id)) }}" class="py-2 mr-2 px-4 text-sm bg-slate-700 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
                                         <i class="fa-solid fa-edit"></i> Edit
                                     </a>
-                                    <button
+                                    <a href="{{ route('admin.sub-kriteria.destroy', Crypt::encrypt($row->id)) }}"
                                         class="py-2 px-4 bg-red-500 text-sm text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
                                         <i class="fa-solid fa-trash"></i> Hapus
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
