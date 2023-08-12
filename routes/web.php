@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
+use App\Http\Controllers\Admin\SubcriteriaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
@@ -47,6 +48,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('admin/kriteria', [KriteriaController::class, 'index'])->name('admin.kriteria.index');
         Route::get('admin/kriteria/create', [KriteriaController::class, 'create'])->name('admin.kriteria.create');
         Route::post('admin/kriteria/create', [KriteriaController::class, 'save'])->name('admin.kriteria.save');
+
+        /* Route Subcriteria */
+        Route::get('admin/sub-kriteria',[SubcriteriaController::class, 'index'])->name('admin.sub-criteria.index');
+        Route::get('admin/sub-kriteria/create/{id}', [SubcriteriaController::class, 'create'])->name('admin.sub-criteria.create');
+        Route::post('admin/sub-kriteria/create/{id}', [SubcriteriaController::class, 'save'])->name('admin.sub-criteria.save');
     });
     Route::fallback(function() {
         return view('pages/utility/404');
