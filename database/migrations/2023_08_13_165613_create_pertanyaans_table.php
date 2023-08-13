@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tes_teoris', function (Blueprint $table) {
+        Schema::create('pertanyaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pelamar_id')->constrained();
-            $table->char('q1');
-            $table->char('q2');
-            $table->char('q3');
-            $table->char('q4');
-            $table->char('q5');
-            $table->char('q6');
+            $table->string('pertanyaan');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tes_teoris');
+        Schema::dropIfExists('pertanyaans');
     }
 };
