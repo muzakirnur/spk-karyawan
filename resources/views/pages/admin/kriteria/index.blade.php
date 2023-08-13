@@ -58,6 +58,10 @@
                         data: 'bobot',
                         name: 'bobot'
                     },
+                    {
+                        data: 'action',
+                        name: 'action'
+                    },
                 ]
             });
         });

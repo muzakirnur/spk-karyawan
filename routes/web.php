@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('admin/kriteria', [KriteriaController::class, 'index'])->name('admin.kriteria.index');
         Route::get('admin/kriteria/create', [KriteriaController::class, 'create'])->name('admin.kriteria.create');
         Route::post('admin/kriteria/create', [KriteriaController::class, 'save'])->name('admin.kriteria.save');
+        Route::get('admin/kriteria/edit/{id}', [KriteriaController::class, 'edit'])->name('admin.kriteria.edit');
+        Route::put('admin/kriteria/edit/{id}', [KriteriaController::class, 'update'])->name('admin.kriteria.update');
 
         /* Route Subcriteria */
         Route::get('admin/sub-kriteria',[SubcriteriaController::class, 'index'])->name('admin.sub-kriteria.index');
