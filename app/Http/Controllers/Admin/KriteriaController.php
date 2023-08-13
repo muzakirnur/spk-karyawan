@@ -16,8 +16,10 @@ class KriteriaController extends Controller
             $criterias = Criteria::query();
             return DataTables::eloquent($criterias)
                 ->addColumn('action', '<a href="{{ route("admin.kriteria.edit", Crypt::encrypt($id)) }}" class="py-2 mr-2 px-4 text-sm bg-indigo-500 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
-                <i class="fa-solid fa-edit"></i> Edit
-            </a>')
+                <i class="fa-solid fa-eye"></i> Lihat
+            </a> <a href="{{ route("admin.kriteria.delete", Crypt::encrypt($id)) }}" class="py-2 mr-2 px-4 text-sm bg-red-500 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
+            <i class="fa-solid fa-trash"></i> Hapus
+        </a>')
                 ->rawColumns(['action'])
                 ->make();
         }
@@ -59,5 +61,12 @@ class KriteriaController extends Controller
         ]);
         $kriteria->update($validated);
         return redirect()->route('admin.kriteria.index')->with('success', 'Data Kriteria Berhasil diperbarui!');
+    }
+
+    public function destroy($id)
+    {
+        $id = Crypt::decrypt($id);
+        $kriteria = Criteria::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Data Kriteria Berhasil dihapus!');
     }
 }

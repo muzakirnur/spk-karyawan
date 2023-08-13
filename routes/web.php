@@ -40,10 +40,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /* Route Manajemen User */
         Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('admin/users/show/{id}', [UserController::class, 'show'])->name('users.show');
 
         /* Route Manajemen Pelamar */
         Route::get('admin/pelamar', [AdminPelamarController::class, 'index'])->name('admin.pelamar.index');
         Route::get('admin/pelamar/show/{id}', [AdminPelamarController::class, 'show'])->name('admin.pelamar.show');
+        Route::get('admin/pelamar/delete/{id}', [AdminPelamarController::class, 'destroy'])->name('admin.pelamar.delete');
 
         /* Route Kriteria */
         Route::get('admin/kriteria', [KriteriaController::class, 'index'])->name('admin.kriteria.index');
@@ -51,6 +53,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('admin/kriteria/create', [KriteriaController::class, 'save'])->name('admin.kriteria.save');
         Route::get('admin/kriteria/edit/{id}', [KriteriaController::class, 'edit'])->name('admin.kriteria.edit');
         Route::put('admin/kriteria/edit/{id}', [KriteriaController::class, 'update'])->name('admin.kriteria.update');
+        Route::get('admin/kriteria/delete/{id}', [KriteriaController::class, 'destroy'])->name('admin.kriteria.delete');
 
         /* Route Subcriteria */
         Route::get('admin/sub-kriteria',[SubcriteriaController::class, 'index'])->name('admin.sub-kriteria.index');

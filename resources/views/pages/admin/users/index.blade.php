@@ -13,6 +13,7 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Hak Akses</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,10 @@
                     {
                         data: 'is_admin',
                         name: 'is_admin'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
                     },
                 ]
             });

@@ -19,8 +19,10 @@ class PelamarController extends Controller
                 return $pelamars->tempat_lahir . ', ' . date('d F Y', strtotime($pelamars->tanggal_lahir));
             })
             ->addColumn('action', '<a href="{{ route("admin.pelamar.show", Crypt::encrypt($id)) }}" class="py-2 mr-2 px-4 text-sm bg-indigo-500 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
-            <i class="fa-solid fa-eye"></i> Show
-        </a>')
+            <i class="fa-solid fa-eye"></i> Lihat
+        </a> <a href="{{ route("admin.pelamar.delete", Crypt::encrypt($id)) }}" class="py-2 mr-2 px-4 text-sm bg-red-500 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
+        <i class="fa-solid fa-trash"></i> Hapus
+    </a>')
             ->rawColumns(['action'])
             ->make();
           }
@@ -32,5 +34,12 @@ class PelamarController extends Controller
         $id = Crypt::decrypt($id);
         $pelamar = Pelamar::findOrFail($id);
         return view('pages.admin.pelamar.show', compact('pelamar'));
+    }
+
+    public function destroy($id)
+    {
+        $id = Crypt::decrypt($id);
+        $pelamar = Pelamar::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Data Berhasil dihapus!');
     }
 }

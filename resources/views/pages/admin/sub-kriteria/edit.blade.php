@@ -22,7 +22,10 @@
                     <input type="number" autofocus class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-blue-400 focus:outline-none focus:transition-shadow" placeholder="Nilai Kriteria" name="nilai" value="{{ $subkriteria->nilai }}" required />
                     <x-input-error :messages="$errors->get('nilai')" class="mt-2" />
                 </div>
-                <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
+                <div class="flex flex-wrap justify-between">
+                    <a href="{{ route('admin.sub-kriteria.index') }}" class="px-4 py-2 bg-slate-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                    <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
+                </div>
             </form>
         </div>
     </div>
