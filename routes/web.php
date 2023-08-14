@@ -9,6 +9,7 @@ use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\TesTeoriController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -35,6 +36,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route data diri pelamar
     Route::get('pelamar/data-diri', [PelamarController::class, 'index'])->name('pelamar.index');
     Route::post('pelamar/data-diri', [PelamarController::class, 'create'])->name('pelamar.create');
+
+    // Route tes teori pelamar
+    Route::get('pelamar/tes-teori', [TesTeoriController::class, 'index'])->name('tes-teori.index');
+    Route::post('pelamar/tes-teori', [TesTeoriController::class, 'save'])->name('tes-teori.save');
+    Route::get('pelamar/tes-teori/{id}', [TesTeoriController::class, 'show'])->name('tes-teori.show');
 
     Route::middleware('pelamar')->group(function (){
         Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');

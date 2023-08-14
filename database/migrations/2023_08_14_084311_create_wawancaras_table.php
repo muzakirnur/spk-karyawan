@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('pelamar_id')->constrained();
             $table->foreignId('pertanyaan_id')->constrained();
             $table->foreignId('jawaban_id')->constrained();
+            $table->integer('nilai');
             $table->timestamps();
         });
     }

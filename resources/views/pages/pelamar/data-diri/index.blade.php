@@ -6,13 +6,20 @@
         </h3>
         @if (session()->has('success'))
         <div alert
-            class="relative p-4 pr-12 mb-4 text-white border border-solid rounded-lg bg-gradient-to-tl from-green-600 to-lime-400 border-lime-300">
+            class="relative p-4 pr-12 mb-4 text-white border border-solid rounded-lg bg-green-600">
             <strong>Berhasil !</strong>
             {{ session('success') }}
         </div>
         @endif
+        @if (session()->has('error'))
+        <div alert
+            class="relative p-4 pr-12 mb-4 text-white border border-solid rounded-lg bg-red-500">
+            <strong>Perhatian !</strong>
+            {{ session('error') }}
+        </div>
+        @endif
         {{-- Form Edit Profile --}}
-        <div class="bg-slate-200 rounded-lg shadow-sm px-8 py-8">
+        <div class="bg-white rounded-lg shadow-sm px-8 py-8">
             <form action="{{ route('pelamar.create') }}" method="POST">
                 @csrf
                 <div class="flex flex-wrap justify-evenly gap-2">
