@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
+use App\Http\Controllers\Admin\PertanyaanController;
 use App\Http\Controllers\Admin\SubcriteriaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
@@ -62,6 +63,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('admin/sub-kriteria/edit/{id}', [SubcriteriaController::class, 'edit'])->name('admin.sub-kriteria.edit');
         Route::put('admin/sub-kriteria/edit/{id}',[SubcriteriaController::class, 'update'])->name('admin.sub-kriteria.update');
         Route::get('admin/sub-kriteria/delete/{id}', [SubcriteriaController::class,'destroy'])->name('admin.sub-kriteria.destroy');
+
+        /* Route untuk Pertanyaan */
+        Route::get('admin/pertanyaan', [PertanyaanController::class, 'index'])->name('admin.pertanyaan.index');
+        Route::get('admin/pertanyaan/create', [PertanyaanController::class, 'create'])->name('admin.pertanyaan.create');
+        Route::post('admin/pertanyaan/create', [PertanyaanController::class, 'save'])->name('admin.pertanyaan.save');
     });
     Route::fallback(function() {
         return view('pages/utility/404');
