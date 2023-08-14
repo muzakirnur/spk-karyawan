@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TesTeoriController;
+use App\Http\Controllers\TesWawancaraController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -41,6 +42,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('pelamar/tes-teori', [TesTeoriController::class, 'index'])->name('tes-teori.index');
     Route::post('pelamar/tes-teori', [TesTeoriController::class, 'save'])->name('tes-teori.save');
     Route::get('pelamar/tes-teori/{id}', [TesTeoriController::class, 'show'])->name('tes-teori.show');
+
+    // Route tes wawancara pelamar
+    Route::get('pelamar/tes-wawancara', [TesWawancaraController::class, 'index'])->name('tes-wawancara.index');
+    Route::post('pelamar/tes-wawancara', [TesWawancaraController::class ,'save'])->name('tes-wawancara.save');
+    Route::get('pelamar/tes-wawancara/{id}', [TesWawancaraController::class, 'show'])->name('tes-wawancara.show');
 
     Route::middleware('pelamar')->group(function (){
         Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');

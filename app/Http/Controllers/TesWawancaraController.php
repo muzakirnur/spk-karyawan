@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Jawaban;
 use App\Models\Pelamar;
 use App\Models\Pertanyaan;
-use App\Models\TesTeori;
+use App\Models\Wawancara;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class TesTeoriController extends Controller
+use function PHPUnit\Framework\isEmpty;
+
+class TesWawancaraController extends Controller
 {
     public function index()
     {
@@ -17,21 +19,22 @@ class TesTeoriController extends Controller
         if($pelamar == null){
             return redirect()->route('pelamar.index')->with('error', 'Harap mengisis data diri terlebih dahulu!');
         }
-        $tesTeori = TesTeori::query()->where('pelamar_id', $pelamar->id)->get();
-        if(!$tesTeori->isEmpty()){
-            return redirect()->route('tes-teori.show', Crypt::encrypt($pelamar->id));
+        $tesWawancara = Wawancara::query()->where('pelamar_id', $pelamar->id)->get();
+        if(!$tesWawancara->isEmpty()){
+            return redirect()->route('tes-wawancara.show', Crypt::encrypt($pelamar->id));
         }
-        $pertanyaans = Pertanyaan::query()->where('kategori', 'TEORI')->get();
-        $jawaban = new Jawaban;
-        return view('pages.pelamar.tes-teori.index', compact('pertanyaans', 'jawaban'));
+        $pertanyaans = Pertanyaan::query()->where('kategori', 'WAWANCARA')->get();
+        $jawaban = new Jawaban();
+        return view('pages.pelamar.tes-wawancara.index', compact('pertanyaans', 'jawaban'));
     }
 
     public function save(Request $request)
     {
-        $pertanyaans = Pertanyaan::query()->where('kategori', 'TEORI')->get();
+        $pertanyaans = Pertanyaan::query()->where('kategori', 'WAWANCARA')->get();
         $pelamar = Pelamar::query()->where('user_id',auth()->id())->first();
         foreach($pertanyaans as $pertanyaan){
-            TesTeori::create([
+            Wawancara::create([
+                'tanggal' => date(now()),
                 'pelamar_id' => $pelamar->id,
                 'pertanyaan_id' => $pertanyaan->id,
                 'jawaban_id' => $request->jawaban[$pertanyaan->id],
@@ -55,7 +58,9 @@ class TesTeoriController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        $tesTeori = TesTeori::query()->with('pertanyaan', 'jawaban')->where('pelamar_id', $id)->get();
-        return view('pages.pelamar.tes-teori.show', compact('tesTeori'));
+        $wawancara = Wawancara::query()->with('pertanyaan', 'jawaban')->where('pelamar_id', $id)->get();
+        return view('pages.pelamar.tes-wawancara.show', compact('wawancara'));
     }
 }
+
+
