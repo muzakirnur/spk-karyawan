@@ -68,6 +68,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('admin/pertanyaan', [PertanyaanController::class, 'index'])->name('admin.pertanyaan.index');
         Route::get('admin/pertanyaan/create', [PertanyaanController::class, 'create'])->name('admin.pertanyaan.create');
         Route::post('admin/pertanyaan/create', [PertanyaanController::class, 'save'])->name('admin.pertanyaan.save');
+        Route::get('admin/pertanyaan/show/{id}', [PertanyaanController::class, 'show'])->name('admin.pertanyaan.show');
+        Route::put('admin/pertanyaan/show/{id}', [PertanyaanController::class, 'update'])->name('admin.pertanyaan.update');
+        Route::get('admin/pertanyaan/delete/{id}', [PertanyaanController::class, 'destroy'])->name('admin.pertanyaan.delete');
     });
     Route::fallback(function() {
         return view('pages/utility/404');
