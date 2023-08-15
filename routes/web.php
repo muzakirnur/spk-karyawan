@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Hasil\TesTeoriController as HasilTesTeoriController;
+use App\Http\Controllers\Admin\Hasil\TesWawancaraController as HasilTesWawancaraController;
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
 use App\Http\Controllers\Admin\PertanyaanController;
@@ -83,6 +85,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('admin/pertanyaan/show/{id}', [PertanyaanController::class, 'show'])->name('admin.pertanyaan.show');
         Route::put('admin/pertanyaan/show/{id}', [PertanyaanController::class, 'update'])->name('admin.pertanyaan.update');
         Route::get('admin/pertanyaan/delete/{id}', [PertanyaanController::class, 'destroy'])->name('admin.pertanyaan.delete');
+
+        /* Route untuk hasil Tes Teori */
+        Route::get('admin/hasil/teori', [HasilTesTeoriController::class, 'index'])->name('admin.hasil.teori.index');
+        Route::get('admin/hasil/teori/detail/{id}', [HasilTesTeoriController::class, 'show'])->name('admin.hasil.teori.show');
+
+        /* Route untuk hasil tes wawancara */
+        Route::get('admin/hasil/wawancara', [HasilTesWawancaraController::class, 'index'])->name('admin.hasil.wawancara.index');
+        Route::get('admin/hasil/wawancara/detail/{id}', [HasilTesWawancaraController::class, 'show'])->name('admin.hasil.wawancara.show');
     });
     Route::fallback(function() {
         return view('pages/utility/404');
