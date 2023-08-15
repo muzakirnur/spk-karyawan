@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Hasil\TesTeoriController as HasilTesTeoriControll
 use App\Http\Controllers\Admin\Hasil\TesWawancaraController as HasilTesWawancaraController;
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
+use App\Http\Controllers\Admin\PerhitunganController;
 use App\Http\Controllers\Admin\PertanyaanController;
 use App\Http\Controllers\Admin\SubcriteriaController;
 use Illuminate\Support\Facades\Route;
@@ -93,6 +94,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         /* Route untuk hasil tes wawancara */
         Route::get('admin/hasil/wawancara', [HasilTesWawancaraController::class, 'index'])->name('admin.hasil.wawancara.index');
         Route::get('admin/hasil/wawancara/detail/{id}', [HasilTesWawancaraController::class, 'show'])->name('admin.hasil.wawancara.show');
+
+        /* Route untuk Perhitungan */
+        Route::get('admin/perhitungan', [PerhitunganController::class, 'index'])->name('admin.perhitungan.index');
     });
     Route::fallback(function() {
         return view('pages/utility/404');

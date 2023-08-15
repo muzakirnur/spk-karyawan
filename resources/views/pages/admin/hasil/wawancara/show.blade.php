@@ -72,7 +72,7 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{{ route('admin.hasil.teori.index') }}" class="px-4 py-2 bg-slate-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+            <a href="{{ route('admin.hasil.wawancara.index') }}" class="px-4 py-2 bg-slate-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
         </div>
     </div>
 </x-app-layout>
