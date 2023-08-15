@@ -15,6 +15,9 @@
             {{ session('success') }}
         </div>
         @endif
+        @if($tesTeoris->count() == 0)
+        <h3 class="text-center font-semibold">Data Masih Kosong</h3>
+        @else
         <div class="bg-white px-8 py-12 shadow-lg rounded-lg">
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -62,5 +65,6 @@
                 </table>
             </div>
         </div>
+        @endif
     </div>
 </x-app-layout>

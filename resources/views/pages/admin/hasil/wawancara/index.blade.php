@@ -27,28 +27,18 @@
                                 Nama
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Nilai
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Aksi
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pelamars as $pelamar)
-                        @php
-                            $tes = $wawancara->where('pelamar_id', $pelamar->id)->get();
-                            $nilai = $tes->sum('nilai') / $pertanyaan * 10;
-                        @endphp
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $pelamar->nik }}
                             </th>
                             <td class="px-6 py-4">
                                 {{ $pelamar->nama }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $nilai }}
                             </td>
                             <td class="px-6 py-4">
                                 <a href="{{ route('admin.hasil.wawancara.show', Crypt::encrypt($pelamar->id)) }}" class="py-2 mr-2 px-4 text-sm bg-indigo-500 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
