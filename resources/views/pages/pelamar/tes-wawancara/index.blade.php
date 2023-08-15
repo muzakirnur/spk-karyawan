@@ -18,15 +18,7 @@
                 @foreach ($pertanyaans as $per)
                 <div class="mb-4">
                     <h2 class="text-lg mb-4">{{ $loop->iteration }}. {{ $per->pertanyaan }}</h2>
-                    @php
-                        $data = $jawaban->where('pertanyaan_id', $per->id)->get();
-                    @endphp
-                    @foreach ($data as $jb)
-                    <div class="flex items-center mb-4">
-                        <input id="{{ $jb->id }}" type="radio" value="{{ $jb->id }}" name="jawaban[{{ $per->id }}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required>
-                        <label for="{{ $jb->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $jb->pilihan }}. {{ $jb->jawaban }}</label>
-                    </div>
-                    @endforeach
+                    <textarea class="rounded-lg" name="jawaban[{{ $per->id }}]" cols="50" rows="3"></textarea>
                 </div>
                 @endforeach
                 <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>

@@ -15,7 +15,7 @@
                 </div>
                 <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Kategori</label>
                 <div class="mb-4">
-                    <select
+                    <select id="selectKategori"
                         class="js-example-basic-single w-full leading-5.6 py-2 px-2 rounded-lg text-gray-700 focus:border-blue-400 border-gray-300 text-sm bg-white"
                         name="kategori" required>
                         <option class="text-gray-300" selected value="{{ $pertanyaan->kategori }}"/>{{ $pertanyaan->kategori}}</option>
@@ -25,7 +25,7 @@
                     <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
                 </div>
             </div>
-            <div class="px-8 py-8 bg-white rounded-lg shadow-lg">
+            <div id="choice" class="px-8 py-8 bg-white rounded-lg shadow-lg mb-8">
                 @csrf
                 @foreach ($jawabans as $jawaban)
                 <div class="flex flex-wrap mb-4">
@@ -49,11 +49,33 @@
                     </select>
                     <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
                 </div>
-                <div class="flex flex-wrap justify-between">
-                    <a href="{{ route('admin.pertanyaan.index') }}" class="px-4 py-2 bg-slate-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
-                    <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
-                </div>
+            </div>
+            <div class="flex flex-wrap justify-between">
+                <a href="{{ route('admin.pertanyaan.index') }}" class="px-4 py-2 bg-slate-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
             </div>
         </form>
     </div>
+    @push('custom-scripts')
+        <script>
+            let bar = $("#choice");
+            var pilihan = $('#selectKategori');
+            pilihan.on('change',function(){
+                if(pilihan.val() == "WAWANCARA"){
+                    bar.addClass('hidden');
+                } else {
+                    bar.removeClass('hidden');
+                }
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                var pilihan = $('#selectKategori').val();
+                let bar = $("#choice");
+                if(pilihan == "WAWANCARA"){
+                    bar.addClass('hidden');
+                }
+            });
+        </script>
+    @endpush
 </x-app-layout>

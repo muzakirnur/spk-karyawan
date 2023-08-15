@@ -11,7 +11,6 @@
                         <tr>
                             <th class="text-left">Pertanyaan</th>
                             <th class="text-left">Jawaban</th>
-                            <th class="text-left">Nilai</th>
                         </tr>
                         </th>
                     </thead>
@@ -25,20 +24,11 @@
                             </td>
                             <td class="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
                                 <p class="mb-0 text-sm font-semibold leading-tight">
-                                    {{ $tes->jawaban->pilihan }}
-                                </p>
-                            </td>
-                            <td class="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                <p class="mb-0 text-sm font-semibold leading-tight">
-                                    {{ $tes->nilai }}
+                                    {{ $tes->jawaban }}
                                 </p>
                             </td>
                         </tr>
                         @endforeach
-                        <tr class="border">
-                            <td colspan="2" class="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent text-center">Total</td>
-                            <td class="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">{{ $wawancara->sum('nilai') / $wawancara->count() * 10}}</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

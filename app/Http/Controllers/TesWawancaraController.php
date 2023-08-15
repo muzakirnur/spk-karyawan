@@ -24,8 +24,7 @@ class TesWawancaraController extends Controller
             return redirect()->route('tes-wawancara.show', Crypt::encrypt($pelamar->id));
         }
         $pertanyaans = Pertanyaan::query()->where('kategori', 'WAWANCARA')->get();
-        $jawaban = new Jawaban();
-        return view('pages.pelamar.tes-wawancara.index', compact('pertanyaans', 'jawaban'));
+        return view('pages.pelamar.tes-wawancara.index', compact('pertanyaans'));
     }
 
     public function save(Request $request)
@@ -37,8 +36,7 @@ class TesWawancaraController extends Controller
                 'tanggal' => date(now()),
                 'pelamar_id' => $pelamar->id,
                 'pertanyaan_id' => $pertanyaan->id,
-                'jawaban_id' => $request->jawaban[$pertanyaan->id],
-                'nilai' => $this->penilaian($pertanyaan->id, $request->jawaban[$pertanyaan->id]),
+                'jawaban' => $request->jawaban[$pertanyaan->id],
             ]);
         }
         return redirect()->route('dashboard-pelamar')->with('success', 'Data Tes berhasil disubmit!');
