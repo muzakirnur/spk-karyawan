@@ -24,7 +24,7 @@
                     <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
                 </div>
             </div>
-            <div id="choice" class="px-8 py-8 bg-white rounded-lg shadow-lg">
+            <div id="choice" class="px-8 py-8 bg-white rounded-lg shadow-lg mb-8">
                 @csrf
                 <div class="flex flex-wrap mb-4">
                     <label for="A" class="font-semibold text-lg align-middle p-2">A</label>
