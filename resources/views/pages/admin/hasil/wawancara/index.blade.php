@@ -15,42 +15,46 @@
             {{ session('success') }}
         </div>
         @endif
-        <div class="bg-white px-8 py-12 shadow-lg rounded-lg">
-            <div class="relative overflow-x-auto">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                NIK
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Nama
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Aksi
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pelamars as $pelamar)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $pelamar->nik }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $pelamar->nama }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="{{ route('admin.hasil.wawancara.show', Crypt::encrypt($pelamar->id)) }}" class="py-2 mr-2 px-4 text-sm bg-indigo-500 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
-                                    <i class="fa-solid fa-eye"></i> Lihat
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    {{ $pelamars->links() }}
-                </table>
+        @if ($wawancara->count() == 0)
+            <h3 class="text-center font-semibold">Data Masih Kosong</h3>
+        @else
+            <div class="bg-white px-8 py-12 shadow-lg rounded-lg">
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    NIK
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Nama
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Aksi
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pelamars as $pelamar)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $pelamar->nik }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $pelamar->nama }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="{{ route('admin.hasil.wawancara.show', Crypt::encrypt($pelamar->id)) }}" class="py-2 mr-2 px-4 text-sm bg-indigo-500 text-white rounded-lg hover:opacity-80 transition duration-300 ease-in-out shadow-sm">
+                                        <i class="fa-solid fa-eye"></i> Lihat
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        {{ $pelamars->links() }}
+                    </table>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 </x-app-layout>
