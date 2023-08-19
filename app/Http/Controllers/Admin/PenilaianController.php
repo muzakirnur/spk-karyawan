@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Criteria;
 use App\Models\Pelamar;
+use App\Models\Pertanyaan;
 use App\Models\SubCriteria;
 use App\Models\TesTeori;
 use App\Models\Wawancara;
@@ -41,8 +42,12 @@ class PenilaianController extends Controller
         $id = Crypt::decrypt($id);
         $pelamar = Pelamar::findOrFail($id);
         $kriteria = Criteria::all();
+        $pertanyaanTeori = Pertanyaan::query()->where('kategori', "TEORI")->get();
         $subKriteria = new SubCriteria;
-        return view('pages.admin.penilaian.create', compact('pelamar', 'kriteria', 'subKriteria'));
+        $tesTeori = TesTeori::query()->where('pelamar_id', $id)->get();
+        $nilaiTeori = $tesTeori->sum('nilai') / $pertanyaanTeori->count() * 10;
+        $wawancara = Wawancara::query()->where('pelamar_id', $id)->get();
+        return view('pages.admin.penilaian.create', compact('pelamar', 'kriteria', 'subKriteria', 'nilaiTeori', 'wawancara'));
     }
 
     public function save($id)

@@ -137,6 +137,59 @@
                     </tbody>
                 </table>
             </div>
+            <div class="table-responsive mb-8">
+                <h3 class="font-semibold text-lg mb-2">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    Tes Teori
+                </h3>
+                <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500 dark:text-slate-200">
+                    <tbody>
+                            <tr class="border">
+                                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    <p class="mb-0 text-sm font-semibold leading-tight">
+                                        Tes Teori
+                                    </p>
+                                </td>
+                                <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    <p class="mb-0 text-sm font-semibold leading-tight">
+                                        {{ $nilaiTeori }}
+                                    </p>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive mb-8">
+                <h3 class="font-semibold text-lg mb-2">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    Wawancara
+                </h3>
+                <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500 dark:text-slate-200 border">
+                    <thead>
+                        <tr>
+                            <th class="text-left p-2">Pertanyaan</th>
+                            <th class="text-left p-2">Jawaban</th>
+                        </tr>
+                        </th>
+                    </thead>
+                    <tbody>
+                        @foreach ($wawancara as $tes)
+                        <tr class="border">
+                            <td class="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                <p class="mb-0 text-sm font-semibold leading-tight">
+                                    {{ $tes->pertanyaan->pertanyaan }}
+                                </p>
+                            </td>
+                            <td class="p-2 bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                <p class="mb-0 text-sm font-semibold leading-tight">
+                                    {{ $tes->jawaban }}
+                                </p>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
         <form action="{{ route('admin.penilaian.save', Crypt::encrypt($pelamar->id)) }}" method="POST">
             <div class="px-8 py-8 bg-white rounded-lg shadow-lg mb-8">
