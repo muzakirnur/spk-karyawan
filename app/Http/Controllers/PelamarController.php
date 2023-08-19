@@ -27,6 +27,8 @@ class PelamarController extends Controller
           'email' => ['required', 'unique:pelamars,email,'. $check->id],
           'hp' => ['required', 'min:11', 'max:13', 'unique:pelamars,hp,'. $check->id],
           'alamat' => ['required'],
+          'jarak_rumah' => ['required'],
+          'ipk' => ['required'],
           'pendidikan' => ['required'],
           'pengalaman' => ['required'],
         ]);
@@ -40,6 +42,8 @@ class PelamarController extends Controller
           'email' => ['required', 'unique:pelamars,email'],
           'hp' => ['required', 'min:11', 'max:13', 'unique:pelamars,hp'],
           'alamat' => ['required'],
+          'jarak_rumah' => ['required'],
+          'ipk' => ['required'],
           'pendidikan' => ['required'],
           'pengalaman' => ['required'],
         ]);

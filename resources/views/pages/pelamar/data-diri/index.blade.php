@@ -87,6 +87,20 @@
                     </div>
                 </div>
                 <div class="mb-4">
+                    <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Jarak Rumah (km)</label>
+                    <div class="mb-4">
+                        <input type="number" step="0.1" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-blue-400 focus:outline-none focus:transition-shadow" placeholder="Masukkan Jarak Rumah anda" name="jarak_rumah" value="{{ isset($dataPelamar) ? $dataPelamar->jarak_rumah : old('jarak_rumah') }}" required />
+                        <x-input-error :messages="$errors->get('jarak_rumah')" class="mt-2" />
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="mb-2 ml-1 font-bold text-xs text-slate-700">IPK</label>
+                    <div class="mb-4">
+                        <input type="number" step="0.1" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-blue-400 focus:outline-none focus:transition-shadow" placeholder="Masukkan IPK Anda" name="ipk" value="{{ isset($dataPelamar) ? $dataPelamar->ipk : old('ipk') }}" required />
+                        <x-input-error :messages="$errors->get('ipk')" class="mt-2" />
+                    </div>
+                </div>
+                <div class="mb-4">
                         <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Pendidikan</label>
                         <select
                         class="js-example-basic-single w-full leading-5.6 py-2 px-2 rounded-lg text-gray-700 focus:border-blue-400 border-gray-300 text-sm bg-white"
@@ -100,11 +114,11 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                        <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Pengalaman</label>
-                        <div class="mb-4">
-                            <input type="text" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-blue-400 focus:outline-none focus:transition-shadow" placeholder="Masukkan Pengalaman Bekerja" name="pengalaman" value="{{ isset($dataPelamar) ? $dataPelamar->pengalaman : old('pengalaman') }}" required />
-                            <x-input-error :messages="$errors->get('pengalaman')" class="mt-2" />
-                        </div>
+                    <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Pengalaman</label>
+                    <div class="mb-4">
+                        <input type="text" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-blue-400 focus:outline-none focus:transition-shadow" placeholder="Masukkan Pengalaman Bekerja" name="pengalaman" value="{{ isset($dataPelamar) ? $dataPelamar->pengalaman : old('pengalaman') }}" required />
+                        <x-input-error :messages="$errors->get('pengalaman')" class="mt-2" />
+                    </div>
                 </div>
                 <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
                 <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>

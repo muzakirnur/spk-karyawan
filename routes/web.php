@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Hasil\TesTeoriController as HasilTesTeoriControll
 use App\Http\Controllers\Admin\Hasil\TesWawancaraController as HasilTesWawancaraController;
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
+use App\Http\Controllers\Admin\PenilaianController;
 use App\Http\Controllers\Admin\PerhitunganController;
 use App\Http\Controllers\Admin\PertanyaanController;
 use App\Http\Controllers\Admin\SubcriteriaController;
@@ -97,6 +98,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /* Route untuk Perhitungan */
         Route::get('admin/perhitungan', [PerhitunganController::class, 'index'])->name('admin.perhitungan.index');
+
+        /* Route untuk memberikan Penilaian kepada Pelamar */
+        Route::get('admin/penilaian', [PenilaianController::class, 'index'])->name('admin.penilaian.index');
+        Route::get('admin/penilaian/create/{id}', [PenilaianController::class, 'create'])->name('admin.penilaian.create');
+        Route::post('admin/penilaian/create/{id}', [PenilaianController::class, 'save'])->name('admin.penilaian.save');
     });
     Route::fallback(function() {
         return view('pages/utility/404');

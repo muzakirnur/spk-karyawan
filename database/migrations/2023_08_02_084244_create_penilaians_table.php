@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('penilaians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pelamar_id')->constrained();
+            $table->foreignId('criteria_id')->constrained();
             $table->foreignId('sub_criteria_id')->constrained();
             $table->integer('nilai');
             $table->timestamps();

@@ -1,10 +1,16 @@
 <x-app-layout>
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
         <h3 class="font-semibold text-2xl mb-12">
-            <i class="fa-solid fa-user mr-2"></i>
-            <span> Detail Pelamar</span>
+            <i class="fa-solid fa-pen"></i>
+            <span> Tambah Penilaian</span>
         </h3>
         <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8 dark:bg-slate-500 dark:text-slate-200">
+            <div class="mb-4">
+                <h2 class="font-semibold text-lg">
+                    <i class="fa-regular fa-user"></i>
+                    Data Pelamar
+                </h2>
+            </div>
             <div class="table-responsive mb-8">
                 <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500 dark:text-slate-200">
                     <tbody>
@@ -83,7 +89,7 @@
                             <tr class="border">
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <p class="mb-0 text-sm font-semibold leading-tight">
-                                        Jarak Rumah
+                                        Jarak Rumah 
                                     </p>
                                 </td>
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -95,7 +101,7 @@
                             <tr class="border">
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     <p class="mb-0 text-sm font-semibold leading-tight">
-                                        IPK
+                                        Nilai IPK
                                     </p>
                                 </td>
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -131,7 +137,29 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{{ route('admin.pelamar.index') }}" class="px-4 py-2 bg-slate-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
         </div>
+        <form action="{{ route('admin.penilaian.save', Crypt::encrypt($pelamar->id)) }}" method="POST">
+            <div class="px-8 py-8 bg-white rounded-lg shadow-lg mb-8">
+                @csrf
+                @foreach ($kriteria as $kr)
+                @php
+                    $sub = $subKriteria->where('criteria_id', $kr->id)->get();
+                @endphp
+                <label class="mb-2 ml-1 font-bold text-xs text-slate-700">{{ $kr->nama }} ({{ $kr->kode_kriteria }})</label>
+                <div class="mb-4">
+                    <select id="selectKategori"
+                        class="js-example-basic-single w-full leading-5.6 py-2 px-2 rounded-lg text-gray-700 focus:border-blue-400 border-gray-300 text-sm bg-white"
+                        name="kategori" required>
+                        <option class="text-gray-300" selected value=""/>Pilih</option>
+                        @foreach ($sub as $sb)
+                        <option value="{{ $sb->id }}">{{ $sb->nama }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
+                @endforeach
+                </div>
+                <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
+            </div>
+        </form>
     </div>
 </x-app-layout>

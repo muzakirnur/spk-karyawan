@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('hp');
             $table->string('alamat');
+            $table->integer('jarak_rumah');
+            $table->float('ipk');
             $table->string('pendidikan');
             $table->string('pengalaman');
             $table->timestamps();
