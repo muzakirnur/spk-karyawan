@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Criteria;
 use App\Models\Pelamar;
+use App\Models\Penilaian;
 use App\Models\Pertanyaan;
 use App\Models\SubCriteria;
 use App\Models\TesTeori;
@@ -47,11 +48,46 @@ class PenilaianController extends Controller
         $tesTeori = TesTeori::query()->where('pelamar_id', $id)->get();
         $nilaiTeori = $tesTeori->sum('nilai') / $pertanyaanTeori->count() * 10;
         $wawancara = Wawancara::query()->where('pelamar_id', $id)->get();
-        return view('pages.admin.penilaian.create', compact('pelamar', 'kriteria', 'subKriteria', 'nilaiTeori', 'wawancara'));
+        $penilaian = Penilaian::query()->where('pelamar_id', $id)->get();
+        return view('pages.admin.penilaian.create', compact('pelamar', 'kriteria', 'subKriteria', 'nilaiTeori', 'wawancara', 'penilaian'));
     }
 
-    public function save($id)
+    public function save($id, Request $request)
     {
+        $kriteria = Criteria::all();
         $id = Crypt::decrypt($id);
+        if($this->checkExist($id) == true){
+            foreach($kriteria as $kr){
+                $nilai = SubCriteria::findOrFail($request->penilaian[$kr->id]);
+                Penilaian::create([
+                    'pelamar_id' => $id,
+                    'criteria_id' => $kr->id,
+                    'sub_criteria_id' => $request->penilaian[$kr->id],
+                    'nilai' => $nilai->nilai,
+                ]);
+            }
+        return redirect()->route('admin.penilaian.index')->with('success', 'Penilaian berhasil disubmit!');
+        } else {
+            foreach($kriteria as $kr){
+                $nilai = SubCriteria::findOrFail($request->penilaian[$kr->id]);
+                $penilaian = Penilaian::query()->where('pelamar_id', $id)->where('criteria_id', $kr->id)->first();
+                $penilaian->update([
+                    'sub_criteria_id' => $request->penilaian[$kr->id],
+                    'nilai' => $nilai->nilai
+                ]);
+            }
+        return redirect()->route('admin.penilaian.index')->with('success', 'Penilaian berhasil diupdate!');
+        }
+    }
+
+    private function checkExist($id)
+    {
+        $penilaian = Penilaian::query()->where('pelamar_id', $id)->get();
+        if($penilaian->count() == 0){
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 }

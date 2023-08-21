@@ -6,10 +6,10 @@
         </h3>
         <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8 dark:bg-slate-500 dark:text-slate-200">
             <div class="mb-4">
-                <h2 class="font-semibold text-lg">
+                <h3 class="font-semibold text-lg">
                     <i class="fa-regular fa-user"></i>
                     Data Pelamar
-                </h2>
+                </h3>
             </div>
             <div class="table-responsive mb-8">
                 <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500 dark:text-slate-200">
@@ -193,25 +193,33 @@
         </div>
         <form action="{{ route('admin.penilaian.save', Crypt::encrypt($pelamar->id)) }}" method="POST">
             <div class="px-8 py-8 bg-white rounded-lg shadow-lg mb-8">
+                <h3 class="font-semibold text-lg mb-2">
+                    <i class="fa-solid fa-edit"></i>
+                    Form Penilaian Pelamar
+                </h3>
                 @csrf
                 @foreach ($kriteria as $kr)
                 @php
                     $sub = $subKriteria->where('criteria_id', $kr->id)->get();
+                    $value[$kr->id] = $penilaian->where('criteria_id', $kr->id)->first();
                 @endphp
                 <label class="mb-2 ml-1 font-bold text-xs text-slate-700">{{ $kr->nama }} ({{ $kr->kode_kriteria }})</label>
                 <div class="mb-4">
-                    <select id="selectKategori"
+                    <select id="penilaian"
                         class="js-example-basic-single w-full leading-5.6 py-2 px-2 rounded-lg text-gray-700 focus:border-blue-400 border-gray-300 text-sm bg-white"
-                        name="kategori" required>
-                        <option class="text-gray-300" selected value=""/>Pilih</option>
+                        name="penilaian[{{ $kr->id }}]" required>
+                        <option class="text-gray-300" selected value="{{ $value[$kr->id] != null ? $value[$kr->id]->sub_criteria_id : '' }}"/>{{ $value[$kr->id] != null ? $value[$kr->id]->subCriteria->nama : 'Pilih' }}</option>
                         @foreach ($sub as $sb)
                         <option value="{{ $sb->id }}">{{ $sb->nama }}</option>
                         @endforeach
                     </select>
-                    <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('penilaian[]')" class="mt-2" />
                 @endforeach
                 </div>
-                <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
+                <div class="flex flex-wrap justify-between">
+                    <a href="{{ route('admin.penilaian.index') }}" class="px-4 py-2 bg-slate-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
+                    <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
+                </div>
             </div>
         </form>
     </div>
