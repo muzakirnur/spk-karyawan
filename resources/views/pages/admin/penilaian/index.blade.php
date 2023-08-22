@@ -14,6 +14,7 @@
                             <th>Jenis Kelamin</th>
                             <th>Tes Teori</th>
                             <th>Wawancara</th>
+                            <th>Penilaian</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -47,6 +48,10 @@
                     {
                         data: 'wawancara',
                         name: 'wawancara'
+                    },
+                    {
+                        data: 'penilaian',
+                        name: 'penilaian'
                     },
                     {
                         data: 'action',

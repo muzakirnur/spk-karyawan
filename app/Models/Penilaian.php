@@ -16,4 +16,9 @@ class Penilaian extends Model
     {
         return $this->belongsTo(SubCriteria::class);
     }
+
+    public function pelamar():BelongsTo
+    {
+        return $this->belongsTo(Pelamar::class);
+    }
 }

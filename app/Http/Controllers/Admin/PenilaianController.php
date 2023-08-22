@@ -32,6 +32,10 @@ class PenilaianController extends Controller
                 $wawancara = Wawancara::query()->where('pelamar_id', $pelamars->id)->first();
                 return $wawancara != null ? "SUDAH" : "BELUM";
             })
+            ->addColumn('penilaian', function($pelamars){
+                $penilaian = Penilaian::query()->where('pelamar_id', $pelamars->id)->get();
+                return $penilaian->count() == 0 ? 'BELUM' : 'SUDAH';
+            })
             ->rawColumns(['action'])
             ->make();
           }

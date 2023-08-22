@@ -27,4 +27,9 @@ class Pelamar extends Model
     {
         return $this->hasMany(Wawancara::class);
     }
+
+    public function penilaian():HasMany
+    {
+        return $this->hasMany(Penilaian::class);
+    }
 }

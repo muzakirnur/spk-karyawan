@@ -1,0 +1,1 @@
+<span class="inline-flex items-center justify-center h-5 text-xs font-medium text-white {{ $penilaian->count() == 0 ? 'bg-red-500' : 'bg-green-500' }} px-2 rounded">Belum Dinilai</span>
