@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('kode_kriteria');
             $table->string('bobot');
+            $table->string('type');
             $table->timestamps();
         });
     }

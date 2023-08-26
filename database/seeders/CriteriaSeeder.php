@@ -19,26 +19,31 @@ class CriteriaSeeder extends Seeder
             'nama' => 'Tes Tulis',
             'kode_kriteria' => 'C1',
             'bobot' => "5",
+            'type' => "BENEFIT",
         ]);
         Criteria::create([
             'nama' => 'Tes Wawancara',
             'kode_kriteria' => 'C2',
             'bobot' => "5",
+            'type' => "BENEFIT",
         ]);
         Criteria::create([
             'nama' => 'Pengalaman Kerja',
             'kode_kriteria' => 'C3',
             'bobot' => "5",
+            'type' => "BENEFIT",
         ]);
         Criteria::create([
             'nama' => 'Nilai IPK',
             'kode_kriteria' => 'C4',
             'bobot' => "4",
+            'type' => "BENEFIT",
         ]);
         Criteria::create([
             'nama' => 'Jarak Rumah',
             'kode_kriteria' => 'C5',
             'bobot' => "3",
+            'type' => "COST",
         ]);
     }
 }

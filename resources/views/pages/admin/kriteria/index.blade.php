@@ -29,6 +29,7 @@
                         <tr>
                             <th>Kode Kriteria</th>
                             <th>Nama Kriteria</th>
+                            <th>Tipe</th>
                             <th>Bobot</th>
                             <th>Aksi</th>
                         </tr>
@@ -53,6 +54,10 @@
                     {
                         data: 'nama',
                         name: 'nama'
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
                     },
                     {
                         data: 'bobot',
