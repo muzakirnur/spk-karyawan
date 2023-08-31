@@ -213,7 +213,7 @@
                 Matriks Solusi Ideal Positif dan Negatif
             </h3>
             <div class="table-responsive">
-                <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                <table class="items-center w-full mb-4 align-top border-gray-200 text-slate-500">
                     <thead class="align-bottom">
                         <tr>
                             <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Positif</th>
@@ -258,6 +258,38 @@
                         </tr>
                         @endforeach
                     </tbody>
+                </table>
+                <table class="items-center w-full mb-4 align-top border-gray-200 text-slate-500">
+                    <thead class="align-bottom">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Solusi Ideal Positif</th>
+                            <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">A+</th>
+                            @foreach ($kriterias as $kr)
+                            @php
+                                if($kr->type == "BENEFIT"){
+                                    $getMax = max($matriksY[$kr->kode_kriteria]);
+                                } else {
+                                    $getMax = min($matriksY[$kr->kode_kriteria]);
+                                }
+                            @endphp 
+                            <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">{{ $getMax[0] }}</th>
+                            @endforeach   
+                        </tr>
+                        <tr>
+                            <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Solusi Ideal Negatif</th>
+                            <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">A-</th>
+                            @foreach ($kriterias as $kr)
+                            @php
+                                if($kr->type == "BENEFIT"){
+                                    $getMax = min($matriksY[$kr->kode_kriteria]);
+                                } else {
+                                    $getMax = max($matriksY[$kr->kode_kriteria]);
+                                }
+                            @endphp 
+                            <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">{{ $getMax[0] }}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
                 </table>
             </div>
         </div>
