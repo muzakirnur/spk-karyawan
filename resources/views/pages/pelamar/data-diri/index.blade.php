@@ -96,7 +96,7 @@
                 <div class="mb-4">
                     <label class="mb-2 ml-1 font-bold text-xs text-slate-700">IPK</label>
                     <div class="mb-4">
-                        <input type="number" step="0.1" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-blue-400 focus:outline-none focus:transition-shadow" placeholder="Masukkan IPK Anda" name="ipk" value="{{ isset($dataPelamar) ? $dataPelamar->ipk : old('ipk') }}" required />
+                        <input type="number" step="0.01" max="4.00" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 transition-all focus:border-blue-400 focus:outline-none focus:transition-shadow" placeholder="Masukkan IPK Anda" name="ipk" value="{{ isset($dataPelamar) ? $dataPelamar->ipk : old('ipk') }}" required />
                         <x-input-error :messages="$errors->get('ipk')" class="mt-2" />
                     </div>
                 </div>

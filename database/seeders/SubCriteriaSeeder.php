@@ -116,12 +116,12 @@ class SubCriteriaSeeder extends Seeder
         /* Subkriteria untuk Jarak Rumah*/
         SubCriteria::create([
             'criteria_id' => 5,
-            'nama' => "21-25 Km",
+            'nama' => "0-5 Km",
             'nilai' => 20,
         ]);
         SubCriteria::create([
             'criteria_id' => 5,
-            'nama' => "15-20 Km",
+            'nama' => "6-10 Km",
             'nilai' => 40,
         ]);
         SubCriteria::create([
@@ -131,12 +131,12 @@ class SubCriteriaSeeder extends Seeder
         ]);
         SubCriteria::create([
             'criteria_id' => 5,
-            'nama' => "6-10 Km",
+            'nama' => "15-20 Km",
             'nilai' => 80,
         ]);
         SubCriteria::create([
             'criteria_id' => 5,
-            'nama' => "0-5 Km",
+            'nama' => "21-25 Km",
             'nilai' => 100,
         ]);
     }

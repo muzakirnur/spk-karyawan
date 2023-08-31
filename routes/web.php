@@ -103,6 +103,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('admin/penilaian', [PenilaianController::class, 'index'])->name('admin.penilaian.index');
         Route::get('admin/penilaian/create/{id}', [PenilaianController::class, 'create'])->name('admin.penilaian.create');
         Route::post('admin/penilaian/create/{id}', [PenilaianController::class, 'save'])->name('admin.penilaian.save');
+
     });
     Route::fallback(function() {
         return view('pages/utility/404');
