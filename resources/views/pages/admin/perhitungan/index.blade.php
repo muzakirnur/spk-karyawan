@@ -199,6 +199,7 @@
                                 $getNilaiPelamar[$kr->id] = $getNilaiPelamar[$kr->id]->nilai/$squareRoot[$kr->id];
                                 $nilaiY[$kr->id] = $getNilaiPelamar[$kr->id]*$kr->bobot;
                                 array_push($matriksY[$kr->kode_kriteria][$pelamar->id], $nilaiY[$kr->id]);
+                                $jarak[$pelamar->id][$kr->id] = $nilaiY[$kr->id];
                             @endphp
                             <td class="p-2 align-middle border-r text-center bg-transparent border-b whitespace-nowrap shadow-transparent">{{ $nilaiY[$kr->id] }}</td>
                             @endforeach
@@ -271,6 +272,7 @@
                                 } else {
                                     $getMax = min($matriksY[$kr->kode_kriteria]);
                                 }
+                                $positif[$kr->id] = $getMax;
                             @endphp 
                             <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">{{ $getMax[0] }}</th>
                             @endforeach   
@@ -285,11 +287,84 @@
                                 } else {
                                     $getMax = max($matriksY[$kr->kode_kriteria]);
                                 }
+                                $negatif[$kr->id] = $getMax;
                             @endphp 
                             <th scope="col" class="px-6 py-3 pl-2 border-r border-l border-t font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">{{ $getMax[0] }}</th>
                             @endforeach
                         </tr>
                     </thead>
+                </table>
+            </div>
+        </div>
+        <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8">
+            <h3 class="font-semibold text-lg mb-4">
+                Jarak Antara Setiap Nilai Alternatif dengan Matriks Solusi Ideal Positif & Negatif
+            </h3>
+            <div class="table-responsive">
+                <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                    <thead class="align-bottom">
+                        <tr>
+                            <th
+                                class="px-6 py-3 pl-2 text-center border-t border-r border-l font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                Nama</th>
+                            <th
+                                class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                Jarak Alternatif</th>
+                            <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                D+</th>
+                            <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                Positif +</th>
+                            <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                Negatif -</th>
+                            <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                D -</th>
+                            <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                (D+) + (D-)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pelamars as $pelamar)      
+                        <tr>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                {{ $pelamar->nama }}
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                A{{ $loop->iteration }}
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                D{{ $loop->iteration }}+
+                            </td>
+                            @php
+                                // Menhitung Positif
+                                $hasilPositif = 0;
+                                $hasilNegatif = 0;
+                                foreach($kriterias as $kr){
+                                    $nilaiPositif = $positif[$kr->id][0] - $jarak[$pelamar->id][$kr->id];
+                                    $nilaiNegatif = $negatif[$kr->id][0] - $jarak[$pelamar->id][$kr->id];
+                                    $nilaiPositif = pow($nilaiPositif, 2);
+                                    $nilaiNegatif = pow($nilaiNegatif, 2);
+                                    $hasilPositif = $hasilPositif + $nilaiPositif;
+                                    $hasilNegatif = $hasilNegatif + $nilaiNegatif;
+                                }
+                                $hasilPositif = sqrt($hasilPositif);
+                                $hasilNegatif = sqrt($hasilNegatif);
+                                $pertambahanNilai = $hasilPositif + $hasilNegatif;
+                            @endphp
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                               {{ $hasilPositif }}
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                               {{ $hasilNegatif }}
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                               D{{ $loop->iteration }}-
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                {{ $pertambahanNilai }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
