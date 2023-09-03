@@ -315,9 +315,9 @@
                             <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
                                 Positif +</th>
                             <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
-                                Negatif -</th>
+                                D-</th>
                             <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
-                                D -</th>
+                                Negatif</th>
                             <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
                                 (D+) + (D-)</th>
                         </tr>
@@ -349,18 +349,76 @@
                                 $hasilPositif = sqrt($hasilPositif);
                                 $hasilNegatif = sqrt($hasilNegatif);
                                 $pertambahanNilai = $hasilPositif + $hasilNegatif;
+                                $hn[$pelamar->id] = $hasilNegatif;
+                                $pn[$pelamar->id] = $pertambahanNilai;
                             @endphp
                             <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
                                {{ $hasilPositif }}
                             </td>
                             <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                D{{ $loop->iteration }}-
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
                                {{ $hasilNegatif }}
                             </td>
                             <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
-                               D{{ $loop->iteration }}-
+                                {{ $pertambahanNilai }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8">
+            <h3 class="font-semibold text-lg mb-4">
+                Nilai Preferensi dari Setiap Kriteria
+            </h3>
+            <div class="table-responsive">
+                <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                    <thead class="align-bottom">
+                        <tr>
+                            <th
+                                class="px-6 py-3 pl-2 text-center border-t border-r border-l font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                Nama</th>
+                            <th
+                                class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                Alternatif</th>
+                            <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                V</th>
+                            <th class="px-6 py-3 pl-2 text-center border-t border-r font-bold uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                Ranking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            foreach ($pelamars as $pelamar) {
+                                $v[$pelamar->id] = $hn[$pelamar->id] / $pn[$pelamar->id];
+                            }
+                            $ordered_values = $v;
+                            rsort($ordered_values);
+                        @endphp
+                        @foreach ($pelamars as $key => $value)      
+                        <tr>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                {{ $value->nama }}
                             </td>
                             <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                {{ $pertambahanNilai }}
+                                A{{ $loop->iteration }}
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                {{ $v[$value->id]}}
+                            </td>
+                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                @php
+                                    foreach ($ordered_values as $ordered_key => $ordered_value) {
+                                        if ($v[$value->id] === $ordered_value) {
+                                            $key = $ordered_key;
+                                            break;
+                                        }
+                                    }
+                                @endphp
+                                {{ $key+1 }}
                             </td>
                         </tr>
                         @endforeach
