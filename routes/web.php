@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SubcriteriaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HasilAkhirController as PelamarHasilAkhir;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TesTeoriController;
@@ -52,6 +53,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('pelamar/tes-wawancara', [TesWawancaraController::class, 'index'])->name('tes-wawancara.index');
     Route::post('pelamar/tes-wawancara', [TesWawancaraController::class ,'save'])->name('tes-wawancara.save');
     Route::get('pelamar/tes-wawancara/{id}', [TesWawancaraController::class, 'show'])->name('tes-wawancara.show');
+
+    /* Route Hasil Akhir untuk Pelamar */
+    Route::get('pelamar/hasil-akhir', [PelamarHasilAkhir::class, 'index'])->name('pelamar.hasil-akhir.index');
 
     Route::middleware('pelamar')->group(function (){
         Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');

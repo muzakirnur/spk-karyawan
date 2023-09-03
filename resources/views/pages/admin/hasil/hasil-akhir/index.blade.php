@@ -7,12 +7,14 @@
                     <span> Hasil Akhir</span>
                 </h3>
             </div>
+            @can('admin')
             <div class="mb-12">
                 <a href="{{ route('admin.hasil-akhir.export') }}" class="bg-red-500 text-white rounded-lg px-4 py-2 shadow-sm text-lg font-semibold transition ease-in-out duration-300 hover:opacity-80">
                     <i class="fa-solid fa-file-pdf"></i>
                     Export PDF
                 </a>
             </div>
+            @endcan
         </div>
         @if (session()->has('success'))
         <div alert
