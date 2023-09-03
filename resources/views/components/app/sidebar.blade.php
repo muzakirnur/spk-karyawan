@@ -243,7 +243,7 @@
                     {{-- Hasil Akhir --}}
                     @can('admin')
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if(in_array(Request::segment(2), ['hasil-akhir'])){{ 'bg-slate-900' }}@endif" x-data="{ open: {{ in_array(Request::segment(2), ['hasil-akhir']) ? 1 : 0 }} }">
-                        <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if(in_array(Request::segment(1), ['messages'])){{ 'hover:text-slate-200' }}@endif" href="#">
+                        <a class="block text-slate-200 hover:text-white truncate transition duration-150 @if(in_array(Request::segment(1), ['messages'])){{ 'hover:text-slate-200' }}@endif" href="{{ route('admin.hasil-akhir.index') }}">
                             <div class="flex items-center justify-between">
                                 <div class="grow flex items-center">
                                     <i class="fa-solid fa-chart-simple"></i>

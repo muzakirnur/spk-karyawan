@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Hasil\TesTeoriController as HasilTesTeoriController;
 use App\Http\Controllers\Admin\Hasil\TesWawancaraController as HasilTesWawancaraController;
+use App\Http\Controllers\Admin\HasilAkhirController;
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\PelamarController as AdminPelamarController;
 use App\Http\Controllers\Admin\PenilaianController;
@@ -105,7 +106,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('admin/penilaian/create/{id}', [PenilaianController::class, 'create'])->name('admin.penilaian.create');
         Route::post('admin/penilaian/create/{id}', [PenilaianController::class, 'save'])->name('admin.penilaian.save');
 
-
+        /* Route untuk Melihat hasil dari Akhir */
+        Route::get('admin/hasil-akhir', [HasilAkhirController::class, 'index'])->name('admin.hasil-akhir.index');
+        Route::get('admin/hasil-akhir/export', [HasilAkhirController::class, 'export'])->name('admin.hasil-akhir.export');
     });
     Route::fallback(function() {
         return view('pages/utility/404');
