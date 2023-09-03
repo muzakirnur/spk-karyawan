@@ -370,6 +370,8 @@
                 </table>
             </div>
         </div>
+        <form action="{{ route('admin.perhitungan.save') }}" method="POST">
+            @csrf
         <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8">
             <h3 class="font-semibold text-lg mb-4">
                 Nilai Preferensi dari Setiap Kriteria
@@ -398,33 +400,39 @@
                             $ordered_values = $v;
                             rsort($ordered_values);
                         @endphp
-                        @foreach ($pelamars as $key => $value)      
-                        <tr>
-                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                {{ $value->nama }}
-                            </td>
-                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                A{{ $loop->iteration }}
-                            </td>
-                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                {{ $v[$value->id]}}
-                            </td>
-                            <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                @php
-                                    foreach ($ordered_values as $ordered_key => $ordered_value) {
-                                        if ($v[$value->id] === $ordered_value) {
-                                            $key = $ordered_key;
-                                            break;
+                            @foreach ($pelamars as $key => $value)      
+                            <tr>
+                                <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    {{ $value->nama }}
+                                    <input type="hidden" name="id[]" value="{{ $value->id }}">
+                                </td>
+                                <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    A{{ $loop->iteration }}
+                                </td>
+                                <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    {{ $v[$value->id]}}
+                                    <input type="hidden" name="nilai[]" value="{{ $v[$value->id] }}">
+                                </td>
+                                <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    @php
+                                        foreach ($ordered_values as $ordered_key => $ordered_value) {
+                                            if ($v[$value->id] === $ordered_value) {
+                                                $key = $ordered_key;
+                                                break;
+                                            }
                                         }
-                                    }
-                                @endphp
-                                {{ $key+1 }}
-                            </td>
-                        </tr>
-                        @endforeach
+                                    @endphp
+                                    {{ $key+1 }}
+                                    <input type="hidden" name="rank[]" value="{{ $key+1 }}">
+                                </td>
+                            </tr>
+                            @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-lg text-white shadow-sm hover:opacity-80 ease-in-out transition duration-300">Simpan</button>
+        </form>
+
     </div>
 </x-app-layout>

@@ -98,11 +98,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /* Route untuk Perhitungan */
         Route::get('admin/perhitungan', [PerhitunganController::class, 'index'])->name('admin.perhitungan.index');
+        Route::post('admin/perhitungan', [PerhitunganController::class, 'save'])->name('admin.perhitungan.save');
 
         /* Route untuk memberikan Penilaian kepada Pelamar */
         Route::get('admin/penilaian', [PenilaianController::class, 'index'])->name('admin.penilaian.index');
         Route::get('admin/penilaian/create/{id}', [PenilaianController::class, 'create'])->name('admin.penilaian.create');
         Route::post('admin/penilaian/create/{id}', [PenilaianController::class, 'save'])->name('admin.penilaian.save');
+
 
     });
     Route::fallback(function() {

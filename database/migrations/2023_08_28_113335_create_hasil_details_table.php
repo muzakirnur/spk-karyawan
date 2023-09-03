@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('hasil_id')->constrained();
             $table->foreignId('pelamar_id')->constrained();
-            $table->float('nilai');
+            $table->float('nilai', 15,15);
             $table->timestamps();
         });
     }
