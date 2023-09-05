@@ -11,28 +11,24 @@ use Yajra\DataTables\Facades\DataTables;
 
 class HasilAkhirController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $getAllYear = Hasil::all();
         $checkYear = date('Y', strtotime(now()));
-        $hasil = Hasil::query()->where('tahun', $checkYear)->first();
-        if (request()->ajax()) {
-            $hasilDetail = HasilDetail::query()->with('pelamar', 'hasil')->where('hasil_id', $hasil->id);
-            return DataTables::eloquent($hasilDetail)
-                ->order(function($query){
-                    $query->orderBy('nilai', 'DESC');
-                })
-                ->orderColumn('nilai', function($query, $order){
-                    $query->orderBy('nilai', $order);
-                })
-                ->addIndexColumn()
-                ->make();
+        if($request->has('tahun')){
+            $checkYear = $request->tahun;
         }
-        return view('pages.admin.hasil.hasil-akhir.index');
+        $hasil = Hasil::query()->where('tahun', $checkYear)->first();
+        $hasilDetail = HasilDetail::query()->with('pelamar', 'hasil')->where('hasil_id', $hasil->id)->orderBy('nilai', 'DESC')->paginate(10);
+        return view('pages.admin.hasil.hasil-akhir.index', compact('hasilDetail', 'getAllYear'));
     }
 
-    public function export()
+    public function export(Request $request)
     {
         $checkYear = date('Y', strtotime(now()));
+        if($request->tahun != null){
+            $checkYear = $request->tahun;
+        }
         $hasil = Hasil::query()->where('tahun', $checkYear)->first();
         $data = HasilDetail::query()->with('pelamar', 'hasil')->where('hasil_id', $hasil->id)->orderBy('nilai', 'DESC')->get();
         $pdf = Pdf::loadView('pdf.exportHasil', ['data'=> $data]);
