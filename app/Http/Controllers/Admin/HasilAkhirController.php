@@ -19,6 +19,9 @@ class HasilAkhirController extends Controller
             $checkYear = $request->tahun;
         }
         $hasil = Hasil::query()->where('tahun', $checkYear)->first();
+        if(!$hasil){
+            $hasil = Hasil::query()->latest('tahun', 'DESC')->first();
+        }
         $hasilDetail = HasilDetail::query()->with('pelamar', 'hasil')->where('hasil_id', $hasil->id)->orderBy('nilai', 'DESC')->paginate(10);
         return view('pages.admin.hasil.hasil-akhir.index', compact('hasilDetail', 'getAllYear'));
     }
