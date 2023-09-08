@@ -40,14 +40,59 @@
         <!-- Cards -->
         <div class="grid grid-cols-12 gap-6">
 
+            <div class="flex flex-col pb-5 col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
+                <div class="px-5 pt-5">
+                    <header class="flex justify-between items-start mb-2">
+                        <!-- Icon -->
+                        <div>
+                            <i class="fa-solid fa-users text-3xl"></i>
+                        </div>
+                        <span class="text-slate-500 text-3xl font-bold">Pelamar</span>
+                        <!-- Menu button -->
+                    </header>
+                    <div class="flex items-start">
+                        <div class="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2">{{ $pelamars }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col pb-5 col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
+                <div class="px-5 pt-5">
+                    <header class="flex justify-between items-start mb-2">
+                        <!-- Icon -->
+                        <div>
+                            <i class="fa-brands fa-uncharted text-3xl"></i>
+                        </div>
+                        <span class="text-slate-500 text-3xl font-bold">Kriteria</span>
+                        <!-- Menu button -->
+                    </header>
+                    <div class="flex items-start">
+                        <div class="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2">{{ $kriterias }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col pb-5 col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
+                <div class="px-5 pt-5">
+                    <header class="flex justify-between items-start mb-2">
+                        <!-- Icon -->
+                        <div>
+                            <i class="fa-solid fa-question text-3xl"></i>
+                        </div>
+                        <span class="text-slate-500 text-3xl font-bold">Pertanyaan</span>
+                        <!-- Menu button -->
+                    </header>
+                    <div class="flex items-start">
+                        <div class="text-3xl font-bold text-slate-800 dark:text-slate-100 mr-2">{{ $pertanyaans }}</div>
+                    </div>
+                </div>
+            </div>
             <!-- Line chart (Acme Plus) -->
-            <x-dashboard.dashboard-card-01 :dataFeed="$dataFeed" />
+            {{-- <x-dashboard.dashboard-card-01 :dataFeed="$dataFeed" /> --}}
 
             <!-- Line chart (Acme Advanced) -->
-            <x-dashboard.dashboard-card-02 :dataFeed="$dataFeed" />
+            {{-- <x-dashboard.dashboard-card-02 :dataFeed="$dataFeed" /> --}}
 
             <!-- Line chart (Acme Professional) -->
-            <x-dashboard.dashboard-card-03 :dataFeed="$dataFeed" />
+            {{-- <x-dashboard.dashboard-card-03 :dataFeed="$dataFeed" /> --}}
 
             <!-- Bar chart (Direct vs Indirect) -->
             {{-- <x-dashboard.dashboard-card-04 /> --}}
