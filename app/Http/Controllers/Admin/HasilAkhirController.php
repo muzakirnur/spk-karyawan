@@ -22,7 +22,7 @@ class HasilAkhirController extends Controller
         if(!$hasil){
             $hasil = Hasil::query()->latest('tahun', 'DESC')->first();
         }
-        $hasilDetail = HasilDetail::query()->with('pelamar', 'hasil')->where('hasil_id', $hasil->id)->orderBy('nilai', 'DESC')->paginate(10);
+        $hasilDetail = HasilDetail::query()->with('pelamar', 'hasil')->where('hasil_id', $hasil->id)->orderBy('nilai', 'DESC')->paginate(15);
         return view('pages.admin.hasil.hasil-akhir.index', compact('hasilDetail', 'getAllYear'));
     }
 

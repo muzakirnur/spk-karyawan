@@ -93,8 +93,8 @@
                         </tr>
                         @endforeach
                     </tbody>
-                    {{ $hasilDetail->links() }}
                 </table>
+                {{ $hasilDetail->links() }}
             </div>
         </div>
     </div>
