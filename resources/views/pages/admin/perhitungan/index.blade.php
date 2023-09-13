@@ -46,7 +46,7 @@
                                 </td>
                                 @foreach ($kriterias as $kriteria)
                                 @php
-                                    $nilaiA = $penilaians->where('criteria_id', $kriteria->id)->where('pelamar_id', $pelamar->id)->whereYear('created_at', date('Y', strtotime(now())))->first();
+                                    $nilaiA = $penilaians->where('criteria_id', $kriteria->id)->where('pelamar_id', $pelamar->pelamar_id)->whereYear('created_at', date('Y', strtotime(now())))->first();
                                 @endphp
                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                     {{ $nilaiA->nilai }}
@@ -151,7 +151,7 @@
                                 </th>
                                 @foreach ($kriterias as $kr)
                                 @php
-                                    $nilaiPelamar[$kr->id] = $penilaians->where('pelamar_id', $pelamar->id)->where('criteria_id', $kr->id)->whereYear('created_at', date('Y', strtotime(now())))->first();
+                                    $nilaiPelamar[$kr->id] = $penilaians->where('pelamar_id', $pelamar->pelamar_id)->where('criteria_id', $kr->id)->whereYear('created_at', date('Y', strtotime(now())))->first();
                                     $nilaiPelamar[$kr->id] = $nilaiPelamar[$kr->id]->nilai/$squareRoot[$kr->id];
                                 @endphp
                                 <td class="p-2 align-middle border-r text-center bg-transparent border-b whitespace-nowrap shadow-transparent">{{ $nilaiPelamar[$kr->id] }}</td>
@@ -197,12 +197,12 @@
                                 </th>
                                 @foreach ($kriterias as $kr)
                                 @php
-                                    $matriksY[$kr->kode_kriteria][$pelamar->id] = [];
-                                    $getNilaiPelamar[$kr->id] = $penilaians->where('pelamar_id', $pelamar->id)->where('criteria_id', $kr->id)->whereYear('created_at', date('Y', strtotime(now())))->first();
+                                    $matriksY[$kr->kode_kriteria][$pelamar->pelamar_id] = [];
+                                    $getNilaiPelamar[$kr->id] = $penilaians->where('pelamar_id', $pelamar->pelamar_id)->where('criteria_id', $kr->id)->whereYear('created_at', date('Y', strtotime(now())))->first();
                                     $getNilaiPelamar[$kr->id] = $getNilaiPelamar[$kr->id]->nilai/$squareRoot[$kr->id];
                                     $nilaiY[$kr->id] = $getNilaiPelamar[$kr->id]*$kr->bobot;
-                                    array_push($matriksY[$kr->kode_kriteria][$pelamar->id], $nilaiY[$kr->id]);
-                                    $jarak[$pelamar->id][$kr->id] = $nilaiY[$kr->id];
+                                    array_push($matriksY[$kr->kode_kriteria][$pelamar->pelamar_id], $nilaiY[$kr->id]);
+                                    $jarak[$pelamar->pelamar_id][$kr->id] = $nilaiY[$kr->id];
                                 @endphp
                                 <td class="p-2 align-middle border-r text-center bg-transparent border-b whitespace-nowrap shadow-transparent">{{ $nilaiY[$kr->id] }}</td>
                                 @endforeach
@@ -342,8 +342,8 @@
                                     $hasilPositif = 0;
                                     $hasilNegatif = 0;
                                     foreach($kriterias as $kr){
-                                        $nilaiPositif = $positif[$kr->id][0] - $jarak[$pelamar->id][$kr->id];
-                                        $nilaiNegatif = $negatif[$kr->id][0] - $jarak[$pelamar->id][$kr->id];
+                                        $nilaiPositif = $positif[$kr->id][0] - $jarak[$pelamar->pelamar_id][$kr->id];
+                                        $nilaiNegatif = $negatif[$kr->id][0] - $jarak[$pelamar->pelamar_id][$kr->id];
                                         $nilaiPositif = pow($nilaiPositif, 2);
                                         $nilaiNegatif = pow($nilaiNegatif, 2);
                                         $hasilPositif = $hasilPositif + $nilaiPositif;
@@ -352,8 +352,8 @@
                                     $hasilPositif = sqrt($hasilPositif);
                                     $hasilNegatif = sqrt($hasilNegatif);
                                     $pertambahanNilai = $hasilPositif + $hasilNegatif;
-                                    $hn[$pelamar->id] = $hasilNegatif;
-                                    $pn[$pelamar->id] = $pertambahanNilai;
+                                    $hn[$pelamar->pelamar_id] = $hasilNegatif;
+                                    $pn[$pelamar->pelamar_id] = $pertambahanNilai;
                                 @endphp
                                 <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
                                    {{ $hasilPositif }}
@@ -398,7 +398,7 @@
                         <tbody>
                             @php
                                 foreach ($pelamars as $pelamar) {
-                                    $v[$pelamar->id] = $hn[$pelamar->id] / $pn[$pelamar->id];
+                                    $v[$pelamar->pelamar_id] = $hn[$pelamar->pelamar_id] / $pn[$pelamar->pelamar_id];
                                 }
                                 $ordered_values = $v;
                                 rsort($ordered_values);
@@ -407,19 +407,19 @@
                                 <tr>
                                     <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
                                         {{ $value->nama }}
-                                        <input type="hidden" name="id[]" value="{{ $value->id }}">
+                                        <input type="hidden" name="id[]" value="{{ $value->pelamar_id }}">
                                     </td>
                                     <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
                                         A{{ $loop->iteration }}
                                     </td>
                                     <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                        {{ $v[$value->id]}}
-                                        <input type="hidden" name="nilai[]" value="{{ $v[$value->id] }}">
+                                        {{ $v[$value->pelamar_id]}}
+                                        <input type="hidden" name="nilai[]" value="{{ $v[$value->pelamar_id] }}">
                                     </td>
                                     <td class="p-2 align-middle text-center border bg-transparent border-b whitespace-nowrap shadow-transparent">
                                         @php
                                             foreach ($ordered_values as $ordered_key => $ordered_value) {
-                                                if ($v[$value->id] === $ordered_value) {
+                                                if ($v[$value->pelamar_id] === $ordered_value) {
                                                     $key = $ordered_key;
                                                     break;
                                                 }

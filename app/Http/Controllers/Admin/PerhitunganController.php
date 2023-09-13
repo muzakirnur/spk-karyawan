@@ -8,7 +8,9 @@ use App\Models\Hasil;
 use App\Models\HasilDetail;
 use App\Models\Pelamar;
 use App\Models\Penilaian;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PerhitunganController extends Controller
 {
@@ -16,7 +18,13 @@ class PerhitunganController extends Controller
     {
         $checkPenilaian = Penilaian::query()->where('created_at', date('Y', strtotime(now())))->count();
         $kriterias = Criteria::all();
-        $pelamars = Pelamar::query()->whereRelation('penilaian', 'pelamar_id', '!=', null)->get();
+        $pelamars = DB::table('penilaians')
+            ->select('penilaians.pelamar_id', DB::raw('count(*) as total'), 'pelamars.nama')
+            ->join('pelamars', 'pelamars.id', '=', 'penilaians.pelamar_id')
+            ->whereYear('penilaians.created_at', date('Y', strtotime(now())))
+            ->groupBy('pelamar_id')
+            ->get();
+        // $pelamars = Penilaian::query()->groupBy('pelamar_id')->with('pelamar')->whereYear('created_at', date('Y', strtotime(now())))->get();
         $penilaians = new Penilaian;
         return view('pages.admin.perhitungan.index', compact('kriterias', 'pelamars', 'penilaians', 'checkPenilaian'));
     }
@@ -24,7 +32,7 @@ class PerhitunganController extends Controller
     public function save(Request $request)
     {
         $tahun = date('Y', strtotime(now()));
-        $hasil = Hasil::query()->where('tahun', $tahun)->first();
+        $hasil = Hasil::query()->whereYear('tahun', $tahun)->first();
         if($hasil == null){
             $hasil = Hasil::create([
                 'tahun' => $tahun,
