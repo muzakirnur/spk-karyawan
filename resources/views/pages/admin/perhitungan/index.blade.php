@@ -15,7 +15,7 @@
             {{ session('success') }}
         </div>
         @endif
-        @if ($checkPenilaian <= 1)
+        @if ($checkPenilaian < 1)
             <p>Data Belum ada, Atau Belum Memenuhi !!</p>
         @else
             <div class="bg-white px-8 py-12 shadow-lg rounded-lg mb-8">
