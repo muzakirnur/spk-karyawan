@@ -16,7 +16,7 @@ class PerhitunganController extends Controller
 {
     public function index()
     {
-        $checkPenilaian = Penilaian::query()->where('created_at', date('Y', strtotime(now())))->count();
+        $checkPenilaian = Penilaian::query()->whereYear('created_at', date('Y', strtotime(now())))->count();
         $kriterias = Criteria::all();
         $pelamars = DB::table('penilaians')
             ->select('penilaians.pelamar_id', DB::raw('count(*) as total'), 'pelamars.nama')
